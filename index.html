@@ -7,60 +7,68 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --cc-red: #ed1c24; 
-            --cc-black: #000000; 
+            --spirit-dark: #0a192f;
+            --spirit-medium: #112240;
+            --spirit-light: #1d3557;
+            --spirit-gold: #d4af37;
+            --text-main: #f8f9fa;
+            --text-muted: #b0c4de;
         }
         
         body { 
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            margin: 0; 
+            margin: 0;
             padding: 10px; 
-            background-color: #f4f4f4; 
-            color: #333; 
+            background-color: var(--spirit-dark); 
+            color: var(--text-main); 
         }
 
         .container { 
             max-width: 1400px; 
             margin: auto; 
-            background: white; 
+            background: var(--spirit-medium); 
             padding: 20px; 
             border-radius: 8px; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+            box-shadow: 0 0 25px rgba(0,0,0,0.6); 
+            border: 1px solid var(--spirit-gold);
         }
 
         h1 { 
-            color: var(--cc-red); 
-            border-bottom: 3px solid var(--cc-red); 
+            color: var(--spirit-gold); 
+            border-bottom: 3px solid var(--spirit-gold); 
             padding-bottom: 10px; 
             margin-top: 0; 
             font-size: 1.5rem;
             text-align: center;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .header-fields { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 15px; 
+            gap: 15px;
             margin-bottom: 25px; 
-            background: #fff5f5; 
+            background: var(--spirit-light); 
             padding: 15px; 
             border-radius: 5px; 
-            border: 1px solid #ffcccc; 
+            border: 1px solid var(--spirit-gold); 
         }
 
         .field-group { display: flex; flex-direction: column; }
-        label { font-weight: bold; margin-bottom: 5px; font-size: 0.85em; color: #555; }
+        label { font-weight: bold; margin-bottom: 5px; font-size: 0.85em; color: var(--spirit-gold); }
         input[type="text"], input[type="number"] { 
             padding: 10px; 
-            border: 1px solid #ccc; 
+            border: 1px solid var(--spirit-gold); 
             border-radius: 4px; 
             font-size: 16px; 
+            background: #fff;
+            color: #000;
         }
 
         .section-header { 
-            background: var(--cc-black); 
-            color: white; 
+            background: var(--spirit-gold); 
+            color: #000; 
             padding: 12px 15px; 
             margin-top: 30px; 
             display: flex; 
@@ -69,16 +77,17 @@
             align-items: center; 
             border-radius: 4px 4px 0 0; 
             gap: 10px;
+            font-weight: bold;
         }
 
         .section-discount-input { display: flex; align-items: center; gap: 10px; font-size: 0.85em; }
-        .section-discount-input input { width: 50px; padding: 5px; border-radius: 3px; border: none; text-align: center; }
+        .section-discount-input input { width: 50px; padding: 5px; border-radius: 3px; border: 1px solid #000; text-align: center; color: #000; }
 
         .table-responsive {
             width: 100%;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            border: 1px solid #ddd;
+            border: 1px solid var(--spirit-light);
             margin-bottom: 5px;
         }
 
@@ -90,10 +99,11 @@
         }
 
         th { 
-            background: #f8f8f8; 
+            background: var(--spirit-light); 
+            color: var(--text-main);
             text-align: center; 
             padding: 6px 4px; 
-            border-bottom: 2px solid #ddd; 
+            border-bottom: 2px solid var(--spirit-gold); 
             font-size: 0.72rem;
             line-height: 1.15;
             vertical-align: middle;
@@ -103,12 +113,14 @@
             text-align: left; 
             width: 38%; 
             font-size: 0.85rem;
+            color: var(--spirit-gold);
         }
 
         td { 
             padding: 6px 4px; 
-            border-bottom: 1px solid #eee; 
+            border-bottom: 1px solid var(--spirit-light); 
             text-align: center; 
+            color: var(--text-main);
         }
 
         td.col-product { 
@@ -117,17 +129,17 @@
             font-weight: 600;
         }
         
-        input.qty { width: 40px; padding: 4px; text-align: center; font-weight: bold; }
-        input.disc { width: 35px; padding: 4px; text-align: center; }
+        input.qty { width: 40px; padding: 4px; text-align: center; font-weight: bold; color: #000; }
+        input.disc { width: 35px; padding: 4px; text-align: center; color: #000; }
 
-        .row-total { font-weight: bold; color: var(--cc-black); white-space: nowrap; }
-        .final-unit-price { font-weight: bold; color: #d32f2f; white-space: nowrap; }
-        .unit-price { color: #666; white-space: nowrap; }
-        .tax-info { color: #888; font-size: 0.85em; }
+        .row-total { font-weight: bold; color: var(--spirit-gold); white-space: nowrap; }
+        .final-unit-price { font-weight: bold; color: #ff8a80; white-space: nowrap; }
+        .unit-price { color: var(--text-muted); white-space: nowrap; }
+        .tax-info { color: #a0aec0; font-size: 0.85em; }
 
-        .summary-bar { 
-            background: var(--cc-red); 
-            color: white; 
+        .summary-bar {
+            background: var(--spirit-gold); 
+            color: #000; 
             padding: 20px; 
             display: flex; 
             flex-direction: column;
@@ -145,9 +157,9 @@
         }
 
         .btn-export { 
-            background: #28a745; 
+            background: #1b4332; 
             color: white; 
-            border: none; 
+            border: 1px solid var(--spirit-gold); 
             padding: 15px 25px; 
             border-radius: 5px; 
             cursor: pointer; 
@@ -157,12 +169,18 @@
             margin-bottom: 20px; 
         }
 
-        @media print { 
+        @media print {
             .no-print { display: none !important; } 
-            .container { box-shadow: none; border: none; padding: 0; max-width: 100%; } 
-            body { margin: 0; padding: 0; background-color: white; }
+            .container { box-shadow: none; border: none; padding: 0; max-width: 100%; background: white; color: black; border: none; } 
+            body { margin: 0; padding: 0; background-color: white; color: black; }
+            th { background: #eee !important; color: black !important; border-bottom: 2px solid #000; }
+            td { color: black !important; border-bottom: 1px solid #ccc; }
             .table-responsive { overflow: visible; }
             table { min-width: 100%; font-size: 6.5pt; }
+            .row-total { color: black !important; }
+            .final-unit-price { color: #d32f2f !important; }
+            .unit-price { color: #333 !important; }
+            .tax-info { color: #555 !important; }
         }
     </style>
 </head>
@@ -201,142 +219,142 @@
 const pricingData = {
     "RTD (Ready to Drink)": [
         { name: "Jack Daniels&Coke 5% X12", vol: "0.33", pack: 12, basePriceNoTax: 548.40, tax: 81.28, price: 629.68, priceVat: 761.91 },
-        { name: "Jack Daniels&Coke zero 5% Х12", vol: "0.33", pack: 12, basePriceNoTax: 548.40, tax: 81.28, price: 629.68, priceVat: 761.91 },
+        { name: "Jack Daniels&Coke zero 5% X12", vol: "0.33", pack: 12, basePriceNoTax: 548.40, tax: 81.28, price: 629.68, priceVat: 761.91 },
         { name: "Bacardi&Coke 5% X12", vol: "0.25", pack: 12, basePriceNoTax: 445.35, tax: 61.58, price: 506.93, priceVat: 613.39 }
     ],
     "Rum": [
-        { name: "Brugal 1888 40%", vol: "0.70", pack: 1, basePriceNoTax: 785.06, tax: 114.94, price: 900.00, priceVat: 1089.00 },
-        { name: "Brugal Maestro Reserva 41,2%", vol: "0.70", pack: 1, basePriceNoTax: 3061.46, tax: 118.39, price: 3179.85, priceVat: 3847.62 },
-        { name: "Brugal Coleccion Visionaria 02 45%", vol: "0.70", pack: 1, basePriceNoTax: 1570.39, tax: 129.31, price: 1699.70, priceVat: 2056.64 },
-        { name: "Andres Brugal 02 41,5%", vol: "0.70", pack: 1, basePriceNoTax: 54136.41, tax: 119.25, price: 54255.66, priceVat: 65649.35 },
-        { name: "Bacardi Carta Blanca 40% 5CL X10", vol: "0.05", pack: 10, basePriceNoTax: 345.90, tax: 82.10, price: 428.00, priceVat: 517.88 },
-        { name: "Bacardi Carta Blanca 37,5%", vol: "0.50", pack: 1, basePriceNoTax: 170.80, tax: 76.97, price: 247.77, priceVat: 299.80 },
-        { name: "Bacardi Carta Blanca 37.5%", vol: "0.70", pack: 1, basePriceNoTax: 217.24, tax: 107.76, price: 325.00, priceVat: 393.25 },
-        { name: "Bacardi Carta Blanca 37.5%", vol: "1.00", pack: 1, basePriceNoTax: 249.06, tax: 153.94, price: 403.00, priceVat: 487.63 },
-        { name: "Bacardi Carta Blanca 37.5%", vol: "1.50", pack: 1, basePriceNoTax: 456.55, tax: 230.91, price: 687.46, priceVat: 831.83 },
-        { name: "Bacardi Carta Oro 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 217.24, tax: 107.76, price: 325.00, priceVat: 393.25 },
-        { name: "Bacardi Carta Oro 37.5%", vol: "1.00", pack: 1, basePriceNoTax: 249.06, tax: 153.94, price: 403.00, priceVat: 487.63 },
-        { name: "Bacardi Carta Negra 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 217.24, tax: 107.76, price: 325.00, priceVat: 393.25 },
-        { name: "Bacardi Carta Negra 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 249.06, tax: 153.94, price: 403.00, priceVat: 487.63 },
-        { name: "Bacardi Spiced 35%", vol: "0.70", pack: 1, basePriceNoTax: 224.43, tax: 100.57, price: 325.00, priceVat: 393.25 },
-        { name: "Bacardi Spiced 35%", vol: "1.00", pack: 1, basePriceNoTax: 246.50, tax: 143.68, price: 390.18, priceVat: 472.12 },
-        { name: "Bacardi Razz 27%", vol: "1.00", pack: 1, basePriceNoTax: 292.16, tax: 110.84, price: 403.00, priceVat: 487.63 },
-        { name: "Bacardi Carribean Spiced 40%", vol: "0.70", pack: 1, basePriceNoTax: 350.06, tax: 114.94, price: 465.00, priceVat: 562.65 },
-        { name: "Bacardi Anejo Cuatro 40%", vol: "0.70", pack: 1, basePriceNoTax: 358.06, tax: 114.94, price: 473.00, priceVat: 572.33 },
-        { name: "Bacardi Reserva Ocho 40%", vol: "0.70", pack: 1, basePriceNoTax: 599.06, tax: 114.94, price: 714.00, priceVat: 863.94 },
-        { name: "Bacardi Reserva Ocho 40%", vol: "1.00", pack: 1, basePriceNoTax: 755.80, tax: 164.20, price: 920.00, priceVat: 1113.20 },
-        { name: "Bacardi Grand Reserva Diez 40%", vol: "0.70", pack: 1, basePriceNoTax: 948.06, tax: 114.94, price: 1063.00, priceVat: 1286.23 },
-        { name: "Santa Teresa 1796 40%", vol: "0.70", pack: 1, basePriceNoTax: 1064.76, tax: 114.94, price: 1179.70, priceVat: 1427.44 },
-        { name: "Pyrat XO Reserve 40%", vol: "0.70", pack: 1, basePriceNoTax: 640.06, tax: 114.94, price: 755.00, priceVat: 913.55 },
-        { name: "Facundo Eximo 40%", vol: "0.70", pack: 1, basePriceNoTax: 2028.29, tax: 114.94, price: 2143.23, priceVat: 2593.31 },
-        { name: "Facundo Exquisito 40%", vol: "0.70", pack: 1, basePriceNoTax: 3739.49, tax: 114.94, price: 3854.43, priceVat: 4663.86 },
-        { name: "Facundo Paraiso 40%", vol: "0.70", pack: 1, basePriceNoTax: 7285.16, tax: 114.94, price: 7400.10, priceVat: 8954.12 }
+        { name: "Brugal 1888 40%", vol: "0.70", pack: 1, basePriceNoTax: 903.68, tax: 114.94, price: 1018.62, priceVat: 1232.53 },
+        { name: "Brugal Maestro Reserva 41,2%", vol: "0.70", pack: 1, basePriceNoTax: 3284.69, tax: 118.39, price: 3403.08, priceVat: 4117.73 },
+        { name: "Brugal Coleccion Visionaria 02 45%", vol: "0.70", pack: 1, basePriceNoTax: 1684.89, tax: 129.31, price: 1814.20, priceVat: 2195.18 },
+        { name: "Andres Brugal 02 41,5%", vol: "0.70", pack: 1, basePriceNoTax: 55760.50, tax: 119.25, price: 55879.75, priceVat: 67614.50 },
+        { name: "Bacardi Carta Blanca 40% 5CL X10", vol: "0.05", pack: 10, basePriceNoTax: 366.37, tax: 82.10, price: 448.47, priceVat: 542.65 },
+        { name: "Bacardi Carta Blanca 37,5%", vol: "0.50", pack: 1, basePriceNoTax: 175.92, tax: 76.97, price: 252.89, priceVat: 306.00 },
+        { name: "Bacardi Carta Blanca 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 232.49, tax: 107.76, price: 340.25, priceVat: 411.70 },
+        { name: "Bacardi Carta Blanca 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 279.59, tax: 153.94, price: 433.53, priceVat: 524.57 },
+        { name: "Bacardi Carta Blanca 37,5%", vol: "1.50", pack: 1, basePriceNoTax: 470.25, tax: 230.91, price: 701.16, priceVat: 848.40 },
+        { name: "Bacardi Carta Oro 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 232.49, tax: 107.76, price: 340.25, priceVat: 411.70 },
+        { name: "Bacardi Carta Oro 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 279.59, tax: 153.94, price: 433.53, priceVat: 524.57 },
+        { name: "Bacardi Carta Negra 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 232.49, tax: 107.76, price: 340.25, priceVat: 411.70 },
+        { name: "Bacardi Carta Negra 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 279.59, tax: 153.94, price: 433.53, priceVat: 524.57 },
+        { name: "Bacardi Spiced 35%", vol: "0.70", pack: 1, basePriceNoTax: 239.68, tax: 100.57, price: 340.25, priceVat: 411.70 },
+        { name: "Bacardi Spiced 35%", vol: "1.00", pack: 1, basePriceNoTax: 256.36, tax: 143.68, price: 400.04, priceVat: 484.05 },
+        { name: "Bacardi Razz 27%", vol: "1.00", pack: 1, basePriceNoTax: 319.20, tax: 110.84, price: 430.04, priceVat: 520.35 },
+        { name: "Bacardi Carribean Spiced 40%", vol: "0.70", pack: 1, basePriceNoTax: 377.29, tax: 114.94, price: 492.23, priceVat: 595.60 },
+        { name: "Bacardi Anejo Cuatro 40%", vol: "0.70", pack: 1, basePriceNoTax: 379.81, tax: 114.94, price: 494.75, priceVat: 598.65 },
+        { name: "Bacardi Reserva Ocho 40%", vol: "0.70", pack: 1, basePriceNoTax: 634.53, tax: 114.94, price: 749.47, priceVat: 906.86 },
+        { name: "Bacardi Reserva Ocho 40%", vol: "1.00", pack: 1, basePriceNoTax: 802.09, tax: 164.20, price: 966.29, priceVat: 1169.21 },
+        { name: "Bacardi Grand Reserva Diez 40%", vol: "0.70", pack: 1, basePriceNoTax: 1005.08, tax: 114.94, price: 1120.02, priceVat: 1355.22 },
+        { name: "Santa Teresa 1796 40%", vol: "0.70", pack: 1, basePriceNoTax: 1096.70, tax: 114.94, price: 1211.64, priceVat: 1466.08 },
+        { name: "Pyrat XO Reserve 40%", vol: "0.70", pack: 1, basePriceNoTax: 793.25, tax: 114.94, price: 908.19, priceVat: 1098.91 },
+        { name: "Facundo Eximo 40%", vol: "0.70", pack: 1, basePriceNoTax: 2089.14, tax: 114.94, price: 2204.08, priceVat: 2666.94 },
+        { name: "Facundo Exquisito 40%", vol: "0.70", pack: 1, basePriceNoTax: 3851.67, tax: 114.94, price: 3966.61, priceVat: 4799.60 },
+        { name: "Facundo Paraiso 40%", vol: "0.70", pack: 1, basePriceNoTax: 7503.71, tax: 114.94, price: 7618.65, priceVat: 9218.57 }
     ],
     "Whisky & Whiskey": [
-        { name: "Highland Park 12 YO 40%", vol: "0.70", pack: 1, basePriceNoTax: 780.49, tax: 114.94, price: 895.43, priceVat: 1083.47 },
-        { name: "Highland Park 15 YO 44%", vol: "0.70", pack: 1, basePriceNoTax: 2223.16, tax: 126.43, price: 2349.59, priceVat: 2843.00 },
-        { name: "Highland Park 18 YO 43%", vol: "0.70", pack: 1, basePriceNoTax: 3423.57, tax: 123.56, price: 3547.13, priceVat: 4292.03 },
-        { name: "Highland Park 21 YO 46%", vol: "0.70", pack: 1, basePriceNoTax: 6426.00, tax: 132.18, price: 6558.18, priceVat: 7935.40 },
-        { name: "Highland Park 25 YO 46%", vol: "0.70", pack: 1, basePriceNoTax: 12852.00, tax: 132.18, price: 12984.18, priceVat: 15710.86 },
-        { name: "Highland Park 30 YO 45,2%", vol: "0.70", pack: 1, basePriceNoTax: 28381.50, tax: 129.88, price: 28511.38, priceVat: 34498.77 },
-        { name: "Macallan 12 YO Double cask 40%", vol: "0.70", pack: 1, basePriceNoTax: 1904.78, tax: 114.94, price: 2019.72, priceVat: 2443.86 },
-        { name: "Macallan 15 YO Double Cask 43%", vol: "0.70", pack: 1, basePriceNoTax: 2840.19, tax: 123.56, price: 2963.75, priceVat: 3586.14 },
-        { name: "Macallan 18 YO Double Cask 43%", vol: "0.70", pack: 1, basePriceNoTax: 6842.64, tax: 123.56, price: 6966.20, priceVat: 8429.10 },
-        { name: "Macallan 30 YO Double Cask 43%", vol: "0.70", pack: 1, basePriceNoTax: 91950.07, tax: 123.56, price: 92073.63, priceVat: 111409.09 },
-        { name: "Macallan 12 YO Sherry Oak 40%", vol: "0.70", pack: 1, basePriceNoTax: 1997.35, tax: 114.94, price: 2112.29, priceVat: 2555.87 },
-        { name: "Macallan 18 YO Sherry Oak 43%", vol: "0.70", pack: 1, basePriceNoTax: 7911.53, tax: 123.56, price: 8035.09, priceVat: 9722.46 },
-        { name: "Macallan 25 YO Sherry Oak 43%", vol: "0.70", pack: 1, basePriceNoTax: 50554.33, tax: 123.56, price: 50677.89, priceVat: 61320.25 },
-        { name: "Macallan Harmony 43.9%", vol: "0.70", pack: 1, basePriceNoTax: 3447.45, tax: 126.15, price: 3573.60, priceVat: 4324.06 },
-        { name: "Macallan Clasicut 50,6%", vol: "0.70", pack: 1, basePriceNoTax: 2510.74, tax: 145.40, price: 2656.14, priceVat: 3213.93 },
-        { name: "Macallan Rare Cask 43%", vol: "0.70", pack: 1, basePriceNoTax: 6103.10, tax: 123.56, price: 6226.66, priceVat: 7534.26 },
-        { name: "Macallan A Night on Earth First Light 43%", vol: "0.70", pack: 1, basePriceNoTax: 2297.31, tax: 123.56, price: 2420.87, priceVat: 2929.25 },
-        { name: "Teeling Small Batch 46%", vol: "0.70", pack: 1, basePriceNoTax: 676.95, tax: 132.18, price: 809.13, priceVat: 979.05 },
-        { name: "Teeling Single Grain 46%", vol: "0.70", pack: 1, basePriceNoTax: 790.41, tax: 132.18, price: 922.59, priceVat: 1116.33 },
-        { name: "Teeling Single Malt 46%", vol: "0.70", pack: 1, basePriceNoTax: 907.33, tax: 132.18, price: 1039.51, priceVat: 1257.81 }
+        { name: "Highland Park 12 YO 40%", vol: "0.70", pack: 1, basePriceNoTax: 803.90, tax: 114.94, price: 918.84, priceVat: 1111.80 },
+        { name: "Highland Park 15 YO 44%", vol: "0.70", pack: 1, basePriceNoTax: 2289.85, tax: 126.43, price: 2416.28, priceVat: 2923.70 },
+        { name: "Highland Park 18 YO 43%", vol: "0.70", pack: 1, basePriceNoTax: 3526.28, tax: 123.56, price: 3649.84, priceVat: 4416.31 },
+        { name: "Highland Park 21 YO 46%", vol: "0.70", pack: 1, basePriceNoTax: 6618.78, tax: 132.18, price: 6750.96, priceVat: 8168.66 },
+        { name: "Highland Park 25 YO 46%", vol: "0.70", pack: 1, basePriceNoTax: 13237.56, tax: 132.18, price: 13369.74, priceVat: 16177.39 },
+        { name: "Highland Park 30 YO 45,2%", vol: "0.70", pack: 1, basePriceNoTax: 29232.95, tax: 129.88, price: 29362.83, priceVat: 35529.02 },
+        { name: "Macallan 12 YO Double cask 40%", vol: "0.70", pack: 1, basePriceNoTax: 1961.92, tax: 114.94, price: 2076.86, priceVat: 2513.00 },
+        { name: "Macallan 15 YO Double Cask 43%", vol: "0.70", pack: 1, basePriceNoTax: 2925.40, tax: 123.56, price: 3048.96, priceVat: 3689.24 },
+        { name: "Macallan 18 YO Double Cask 43%", vol: "0.70", pack: 1, basePriceNoTax: 7047.92, tax: 123.56, price: 7171.48, priceVat: 8677.49 },
+        { name: "Macallan 30 YO Double Cask 43%", vol: "0.70", pack: 1, basePriceNoTax: 94708.57, tax: 123.56, price: 94832.13, priceVat: 114746.88 },
+        { name: "Macallan 12 YO Sherry Oak 40%", vol: "0.70", pack: 1, basePriceNoTax: 2057.27, tax: 114.94, price: 2172.21, priceVat: 2628.37 },
+        { name: "Macallan 18 YO Sherry Oak 43%", vol: "0.70", pack: 1, basePriceNoTax: 8148.88, tax: 123.56, price: 8272.44, priceVat: 10009.65 },
+        { name: "Macallan 25 YO Sherry Oak 43%", vol: "0.70", pack: 1, basePriceNoTax: 52070.96, tax: 123.56, price: 52194.52, priceVat: 63155.37 },
+        { name: "Macallan Harmony 43.9%", vol: "0.70", pack: 1, basePriceNoTax: 3550.87, tax: 126.15, price: 3677.02, priceVat: 4449.19 },
+        { name: "Macallan Rare Cask 43%", vol: "0.70", pack: 1, basePriceNoTax: 6286.19, tax: 123.56, price: 6409.75, priceVat: 7755.80 },
+        { name: "Macallan A Night on Earth First Light 43%", vol: "0.70", pack: 1, basePriceNoTax: 2366.23, tax: 123.56, price: 2489.79, priceVat: 3012.65 },
+        { name: "Teeling Small Batch 46%", vol: "0.70", pack: 1, basePriceNoTax: 697.26, tax: 132.18, price: 829.44, priceVat: 1003.62 },
+        { name: "Teeling Single Grain 46%", vol: "0.70", pack: 1, basePriceNoTax: 814.12, tax: 132.18, price: 946.30, priceVat: 1145.02 },
+        { name: "Teeling Single Malt 46%", vol: "0.70", pack: 1, basePriceNoTax: 1066.73, tax: 132.18, price: 934.55, priceVat: 1290.74 }
     ],
     "Vodka": [
-        { name: "Finlandia Vodka pure 40% 5CL X12", vol: "0.05", pack: 12, basePriceNoTax: 370.48, tax: 98.52, price: 469.00, priceVat: 567.49 },
-        { name: "Finlandia Vodka pure 40% 20CL X24", vol: "0.20", pack: 24, basePriceNoTax: 1824.84, tax: 788.16, price: 2613.00, priceVat: 3161.73 },
-        { name: "Finlandia Vodka pure 40%", vol: "0.50", pack: 1, basePriceNoTax: 158.40, tax: 82.10, price: 240.50, priceVat: 291.01 },
-        { name: "Finlandia Vodka pure 40%", vol: "0.70", pack: 1, basePriceNoTax: 187.66, tax: 114.94, price: 302.60, priceVat: 366.15 },
-        { name: "Finlandia Vodka pure 40%", vol: "1.00", pack: 1, basePriceNoTax: 186.80, tax: 164.20, price: 351.00, priceVat: 424.71 },
-        { name: "Finlandia Vodka pure 40%", vol: "1.75", pack: 1, basePriceNoTax: 432.65, tax: 287.35, price: 720.00, priceVat: 871.20 },
-        { name: "Finlandia Vodka Cranberry 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 194.84, tax: 107.76, price: 302.60, priceVat: 366.15 },
-        { name: "Finlandia Vodka Cranberry 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 197.06, tax: 153.94, price: 351.00, priceVat: 424.71 },
-        { name: "Finlandia Vodka Coconut 37.5%", vol: "0.70", pack: 1, basePriceNoTax: 194.84, tax: 107.76, price: 302.60, priceVat: 366.15 },
-        { name: "Finlandia Vodka Coconut 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 197.06, tax: 153.94, price: 351.00, priceVat: 424.71 },
-        { name: "Finlandia Vodka Black currant 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 194.84, tax: 107.76, price: 302.60, priceVat: 366.15 },
-        { name: "Finlandia Vodka Black currant 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 197.06, tax: 153.94, price: 351.00, priceVat: 424.71 },
-        { name: "Finlandia Vodka Grapefruit 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 194.84, tax: 107.76, price: 302.60, priceVat: 366.15 },
-        { name: "Finlandia Vodka Grapefruit 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 197.06, tax: 153.94, price: 351.00, priceVat: 424.71 },
-        { name: "Finlandia Vodka Mango 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 194.84, tax: 107.76, price: 302.60, priceVat: 366.15 },
-        { name: "Finlandia Vodka Mango 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 197.06, tax: 153.94, price: 351.00, priceVat: 424.71 },
-        { name: "Finlandia Vodka Lime 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 194.84, tax: 107.76, price: 302.60, priceVat: 366.15 },
-        { name: "Finlandia Vodka Lime 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 197.06, tax: 153.94, price: 351.00, priceVat: 424.71 },
-        { name: "Finlandia Vodka Redberry 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 194.84, tax: 107.76, price: 302.60, priceVat: 366.15 },
-        { name: "Finlandia Vodka Redberry 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 197.06, tax: 153.94, price: 351.00, priceVat: 424.71 },
-        { name: "Finlandia Vodka Botanical Cucumber & Mint 30%", vol: "0.70", pack: 1, basePriceNoTax: 216.39, tax: 86.21, price: 302.60, priceVat: 366.15 },
-        { name: "Finlandia Vodka Botanical Cucumber & Mint 30%", vol: "1.00", pack: 1, basePriceNoTax: 227.85, tax: 123.15, price: 351.00, priceVat: 424.71 },
-        { name: "Finlandia Vodka Botanical Wildberry & Rose 30%", vol: "0.70", pack: 1, basePriceNoTax: 216.39, tax: 86.21, price: 302.60, priceVat: 366.15 },
-        { name: "Finlandia Vodka Botanical Wildberry & Rose 30%", vol: "1.00", pack: 1, basePriceNoTax: 227.85, tax: 123.15, price: 351.00, priceVat: 424.71 },
-        { name: "Grey Goose Original 40% 5CL X144", vol: "0.05", pack: 144, basePriceNoTax: 9905.76, tax: 1182.24, price: 11088.00, priceVat: 13416.48 },
-        { name: "Grey Goose Original 40%", vol: "0.70", pack: 1, basePriceNoTax: 740.56, tax: 114.94, price: 855.50, priceVat: 1035.16 },
-        { name: "Grey Goose Original 40%", vol: "1.00", pack: 1, basePriceNoTax: 834.80, tax: 164.20, price: 999.00, priceVat: 1208.79 },
-        { name: "Grey Goose Original 40%", vol: "1.50", pack: 1, basePriceNoTax: 1297.70, tax: 246.30, price: 1544.00, priceVat: 1868.24 },
-        { name: "Grey Goose Original 40%", vol: "3.00", pack: 1, basePriceNoTax: 3207.40, tax: 492.60, price: 3700.00, priceVat: 4477.00 },
-        { name: "Grey Goose Original 40%", vol: "6.00", pack: 1, basePriceNoTax: 6413.80, tax: 985.20, price: 7399.00, priceVat: 8952.79 },
-        { name: "Grey Goose Night Vision 40%", vol: "1.00", pack: 1, basePriceNoTax: 1455.80, tax: 164.20, price: 1620.00, priceVat: 1960.20 },
-        { name: "Grey Goose Night Vision 40%", vol: "1.75", pack: 1, basePriceNoTax: 3112.65, tax: 287.35, price: 3400.00, priceVat: 4114.00 }
+        { name: "Finlandia Vodka pure 40% 5CL X12", vol: "0.05", pack: 12, basePriceNoTax: 414.55, tax: 98.52, price: 513.07, priceVat: 620.81 },
+        { name: "Finlandia Vodka pure 40% 20CL X24", vol: "0.20", pack: 24, basePriceNoTax: 2043.11, tax: 788.16, price: 2831.27, priceVat: 3425.84 },
+        { name: "Finlandia Vodka pure 40%", vol: "0.50", pack: 1, basePriceNoTax: 179.84, tax: 82.10, price: 261.94, priceVat: 316.95 },
+        { name: "Finlandia Vodka pure 40%", vol: "0.70", pack: 1, basePriceNoTax: 228.93, tax: 114.94, price: 343.87, priceVat: 416.08 },
+        { name: "Finlandia Vodka pure 40%", vol: "1.00", pack: 1, basePriceNoTax: 245.32, tax: 164.20, price: 409.52, priceVat: 495.52 },
+        { name: "Finlandia Vodka pure 40%", vol: "1.75", pack: 1, basePriceNoTax: 529.56, tax: 287.35, price: 816.91, priceVat: 988.46 },
+        { name: "Finlandia Vodka Cranberry 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 236.11, tax: 107.76, price: 343.87, priceVat: 416.08 },
+        { name: "Finlandia Vodka Cranberry 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 255.58, tax: 153.94, price: 409.52, priceVat: 495.52 },
+        { name: "Finlandia Vodka Coconut 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 236.11, tax: 107.76, price: 343.87, priceVat: 416.08 },
+        { name: "Finlandia Vodka Coconut 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 255.58, tax: 153.94, price: 409.52, priceVat: 495.52 },
+        { name: "Finlandia Vodka Black currant 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 236.11, tax: 107.76, price: 343.87, priceVat: 416.08 },
+        { name: "Finlandia Vodka Black currant 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 255.58, tax: 153.94, price: 409.52, priceVat: 495.52 },
+        { name: "Finlandia Vodka Grapefruit 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 236.11, tax: 107.76, price: 343.87, priceVat: 416.08 },
+        { name: "Finlandia Vodka Grapefruit 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 255.58, tax: 153.94, price: 409.52, priceVat: 495.52 },
+        { name: "Finlandia Vodka Mango 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 236.11, tax: 107.76, price: 343.87, priceVat: 416.08 },
+        { name: "Finlandia Vodka Mango 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 255.58, tax: 153.94, price: 409.52, priceVat: 495.52 },
+        { name: "Finlandia Vodka Lime 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 236.11, tax: 107.76, price: 343.87, priceVat: 416.08 },
+        { name: "Finlandia Vodka Lime 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 255.58, tax: 153.94, price: 409.52, priceVat: 495.52 },
+        { name: "Finlandia Vodka Redberry 37,5%", vol: "0.70", pack: 1, basePriceNoTax: 236.11, tax: 107.76, price: 343.87, priceVat: 416.08 },
+        { name: "Finlandia Vodka Redberry 37,5%", vol: "1.00", pack: 1, basePriceNoTax: 255.58, tax: 153.94, price: 409.52, priceVat: 495.52 },
+        { name: "Finlandia Vodka Botanical Cucumber & Mint 30%", vol: "0.70", pack: 1, basePriceNoTax: 257.66, tax: 86.21, price: 343.87, priceVat: 416.08 },
+        { name: "Finlandia Vodka Botanical Cucumber & Mint 30%", vol: "1.00", pack: 1, basePriceNoTax: 286.37, tax: 123.15, price: 409.52, priceVat: 495.52 },
+        { name: "Finlandia Vodka Botanical Wildberry & Rose 30%", vol: "0.70", pack: 1, basePriceNoTax: 257.66, tax: 86.21, price: 343.87, priceVat: 416.08 },
+        { name: "Finlandia Vodka Botanical Wildberry & Rose 30%", vol: "1.00", pack: 1, basePriceNoTax: 286.37, tax: 123.15, price: 409.52, priceVat: 495.52 },
+        { name: "Grey Goose Original 40% 5CL X144", vol: "0.05", pack: 144, basePriceNoTax: 12629.58, tax: 1182.24, price: 11447.34, priceVat: 15281.79 },
+        { name: "Grey Goose Original 40%", vol: "0.70", pack: 1, basePriceNoTax: 853.88, tax: 114.94, price: 968.82, priceVat: 1172.27 },
+        { name: "Grey Goose Original 40%", vol: "1.00", pack: 1, basePriceNoTax: 962.60, tax: 164.20, price: 1126.80, priceVat: 1363.43 },
+        { name: "Grey Goose Original 40%", vol: "1.50", pack: 1, basePriceNoTax: 1495.97, tax: 246.30, price: 1742.27, priceVat: 2108.15 },
+        { name: "Grey Goose Original 40%", vol: "3.00", pack: 1, basePriceNoTax: 4192.15, tax: 492.60, price: 3699.55, priceVat: 5072.50 },
+        { name: "Grey Goose Night Vision 40%", vol: "1.00", pack: 1, basePriceNoTax: 1563.60, tax: 164.20, price: 1727.80, priceVat: 2090.64 },
+        { name: "Grey Goose Night Vision 40%", vol: "1.75", pack: 1, basePriceNoTax: 3643.65, tax: 287.35, price: 3356.30, priceVat: 4408.82 }
     ],
     "Gin": [
-        { name: "Bombay Sapphire Gin 40% 5CL X12", vol: "0.05", pack: 12, basePriceNoTax: 691.48, tax: 98.52, price: 790.00, priceVat: 1094.66 },
-        { name: "Bombay Sapphire Gin 40%", vol: "0.50", pack: 1, basePriceNoTax: 357.44, tax: 82.10, price: 439.54, priceVat: 531.84 },
-        { name: "Bombay Sapphire Gin 40%", vol: "0.70", pack: 1, basePriceNoTax: 372.56, tax: 114.94, price: 487.50, priceVat: 589.88 },
-        { name: "Bombay Sunset Gin 43%", vol: "0.70", pack: 1, basePriceNoTax: 372.44, tax: 123.56, price: 496.00, priceVat: 600.16 },
-        { name: "Bombay Sapphire Gin 40%", vol: "1.00", pack: 1, basePriceNoTax: 400.80, tax: 164.20, price: 565.00, priceVat: 683.65 },
-        { name: "Bombay Sapphire Premier Cru Gin 47%", vol: "0.70", pack: 1, basePriceNoTax: 674.95, tax: 135.05, price: 810.00, priceVat: 980.10 }
+        { name: "Bombay Sapphire Gin 40% 5CL X12", vol: "0.05", pack: 12, basePriceNoTax: 830.34, tax: 98.52, price: 928.86, priceVat: 1123.92 },
+        { name: "Bombay Sapphire Gin 40%", vol: "0.50", pack: 1, basePriceNoTax: 409.07, tax: 82.10, price: 491.17, priceVat: 594.32 },
+        { name: "Bombay Sapphire Gin 40%", vol: "0.70", pack: 1, basePriceNoTax: 453.52, tax: 114.94, price: 568.46, priceVat: 687.84 },
+        { name: "Bombay Sunset Gin 43%", vol: "0.70", pack: 1, basePriceNoTax: 444.90, tax: 123.56, price: 568.46, priceVat: 687.84 },
+        { name: "Bombay Sapphire Gin 40%", vol: "1.00", pack: 1, basePriceNoTax: 488.43, tax: 164.20, price: 652.63, priceVat: 789.68 },
+        { name: "Bombay Sapphire Premier Cru Gin 47%", vol: "0.70", pack: 1, basePriceNoTax: 805.57, tax: 135.05, price: 940.62, priceVat: 1138.15 }
     ],
     "Tequila": [
-        { name: "Patron Silver 40% 5CL X60", vol: "0.05", pack: 60, basePriceNoTax: 5530.80, tax: 496.20, price: 6027.00, priceVat: 7292.67 },
-        { name: "Patron Silver 40%", vol: "0.70", pack: 1, basePriceNoTax: 1106.08, tax: 114.94, price: 1221.02, priceVat: 1477.43 },
-        { name: "Patron Reposado 40%", vol: "0.70", pack: 1, basePriceNoTax: 1160.52, tax: 114.94, price: 1275.46, priceVat: 1543.31 },
-        { name: "Patron Anejo 40%", vol: "0.70", pack: 1, basePriceNoTax: 1530.34, tax: 114.94, price: 1645.28, priceVat: 1990.79 },
-        { name: "Patron El Cieclo 40%", vol: "0.70", pack: 1, basePriceNoTax: 2153.24, tax: 114.94, price: 2268.18, priceVat: 2744.50 },
-        { name: "Patron XO Barpack 35%", vol: "0.70", pack: 1, basePriceNoTax: 1119.77, tax: 100.57, price: 1220.34, priceVat: 1476.61 },
-        { name: "Patron El Alto 40%", vol: "0.70", pack: 1, basePriceNoTax: 4934.24, tax: 114.94, price: 5049.18, priceVat: 6109.51 }
+        { name: "Patron Silver 40% 5CL X60", vol: "0.05", pack: 60, basePriceNoTax: 6192.92, tax: 496.20, price: 5696.72, priceVat: 7493.43 },
+        { name: "Patron Silver 40%", vol: "0.70", pack: 1, basePriceNoTax: 1139.26, tax: 114.94, price: 1254.20, priceVat: 1517.58 },
+        { name: "Patron Reposado 40%", vol: "0.70", pack: 1, basePriceNoTax: 1310.28, tax: 114.94, price: 1195.34, priceVat: 1585.44 },
+        { name: "Patron Anejo 40%", vol: "0.70", pack: 1, basePriceNoTax: 1691.19, tax: 114.94, price: 1576.25, priceVat: 2046.34 },
+        { name: "Patron El Cieclo 40%", vol: "0.70", pack: 1, basePriceNoTax: 2217.84, tax: 114.94, price: 2332.78, priceVat: 2822.66 },
+        { name: "Patron XO Barpack 35%", vol: "0.70", pack: 1, basePriceNoTax: 1253.93, tax: 100.57, price: 1153.36, priceVat: 1517.26 },
+        { name: "Patron El Alto 40%", vol: "0.70", pack: 1, basePriceNoTax: 5082.27, tax: 114.94, price: 5197.21, priceVat: 6288.62 }
     ],
     "Martini, Sekt & Likéry": [
-        { name: "Asti Martini 7.5%", vol: "0.75", pack: 1, basePriceNoTax: 186.45, tax: 17.55, price: 204.00, priceVat: 246.84 },
-        { name: "Asti Martini 7,5%", vol: "1.50", pack: 1, basePriceNoTax: 404.90, tax: 35.10, price: 440.00, priceVat: 532.40 },
-        { name: "Martini Brut 11,5%", vol: "0.75", pack: 1, basePriceNoTax: 186.45, tax: 17.55, price: 204.00, priceVat: 246.84 },
-        { name: "Martini Prosecco 11,5% 20CL X24", vol: "0.20", pack: 24, basePriceNoTax: 1514.16, tax: 112.32, price: 1626.48, priceVat: 1968.04 },
-        { name: "Martini Prosecco 11,5%", vol: "0.75", pack: 1, basePriceNoTax: 186.45, tax: 17.55, price: 204.00, priceVat: 246.84 },
-        { name: "Martini Prosecco Rose 11,5%", vol: "0.75", pack: 1, basePriceNoTax: 186.45, tax: 17.55, price: 204.00, priceVat: 246.84 },
-        { name: "Martini Bianco/ED/15% 6CL X50", vol: "0.06", pack: 50, basePriceNoTax: 2459.80, tax: 70.20, price: 2530.00, priceVat: 3061.30 },
-        { name: "Martini Bianco 15%", vol: "1.00", pack: 1, basePriceNoTax: 198.10, tax: 23.40, price: 221.50, priceVat: 268.02 },
-        { name: "Martini Fiero 14,9%", vol: "1.00", pack: 1, basePriceNoTax: 198.10, tax: 23.40, price: 221.50, priceVat: 268.02 },
-        { name: "Martini Rosso 15%", vol: "1.00", pack: 1, basePriceNoTax: 198.10, tax: 23.40, price: 221.50, priceVat: 268.02 },
-        { name: "Martini Extra Dry 15%", vol: "1.00", pack: 1, basePriceNoTax: 198.10, tax: 23.40, price: 221.50, priceVat: 268.02 },
-        { name: "Martini Rosato 15%", vol: "1.00", pack: 1, basePriceNoTax: 198.10, tax: 23.40, price: 221.50, priceVat: 268.02 },
-        { name: "Martini Bianco 15%", vol: "0.75", pack: 1, basePriceNoTax: 170.45, tax: 17.55, price: 188.00, priceVat: 227.48 },
-        { name: "Martini Fiero 14,9%", vol: "0.75", pack: 1, basePriceNoTax: 170.45, tax: 17.55, price: 188.00, priceVat: 227.48 },
-        { name: "Martini Rosso 15%", vol: "0.75", pack: 1, basePriceNoTax: 170.45, tax: 17.55, price: 188.00, priceVat: 227.48 },
-        { name: "Martini Extra Dry 15%", vol: "0.75", pack: 1, basePriceNoTax: 170.45, tax: 17.55, price: 188.00, priceVat: 227.48 },
-        { name: "Martini Vibrante Non-Alcoholic 0%", vol: "0.75", pack: 1, basePriceNoTax: 188.00, tax: 0.00, price: 188.00, priceVat: 227.48 },
-        { name: "Martini Florale Non-Alcoholic 0%", vol: "0.75", pack: 1, basePriceNoTax: 188.00, tax: 0.00, price: 188.00, priceVat: 227.48 },
-        { name: "Martini Riserva Speciale Ambra 18%", vol: "0.75", pack: 1, basePriceNoTax: 403.45, tax: 17.55, price: 421.00, priceVat: 509.41 },
-        { name: "Martini Riserva Speciale Rubin 18%", vol: "0.75", pack: 1, basePriceNoTax: 403.45, tax: 17.55, price: 421.00, priceVat: 509.41 },
-        { name: "Martini Riserva Bitter Premium 28,5%", vol: "0.70", pack: 1, basePriceNoTax: 372.11, tax: 81.89, price: 454.00, priceVat: 549.34 },
-        { name: "St Germain 20%", vol: "0.70", pack: 1, basePriceNoTax: 951.84, tax: 57.47, price: 1009.31, priceVat: 1221.27 }
+        { name: "Asti Martini 7,5%", vol: "0.75", pack: 1, basePriceNoTax: 206.27, tax: 17.55, price: 223.82, priceVat: 270.82 },
+        { name: "Asti Martini 7,5%", vol: "1.50", pack: 1, basePriceNoTax: 421.63, tax: 35.10, price: 456.73, priceVat: 552.64 },
+        { name: "Martini Brut 11,5%", vol: "0.75", pack: 1, basePriceNoTax: 206.27, tax: 17.55, price: 223.82, priceVat: 270.82 },
+        { name: "Martini Prosecco 11,5% 20CL X24", vol: "0.20", pack: 24, basePriceNoTax: 1671.90, tax: 112.32, price: 1559.58, priceVat: 2023.00 },
+        { name: "Martini Prosecco 11,5%", vol: "0.75", pack: 1, basePriceNoTax: 203.93, tax: 17.55, price: 221.48, priceVat: 267.99 },
+        { name: "Martini Prosecco Rose 11,5%", vol: "0.75", pack: 1, basePriceNoTax: 206.27, tax: 17.55, price: 223.82, priceVat: 270.82 },
+        { name: "Martini Bianco/ED/15% 6CL X50", vol: "0.06", pack: 50, basePriceNoTax: 2650.50, tax: 70.20, price: 2580.30, priceVat: 3207.11 },
+        { name: "Martini Bianco 15%", vol: "1.00", pack: 1, basePriceNoTax: 204.64, tax: 23.40, price: 228.04, priceVat: 275.93 },
+        { name: "Martini Fiero 14,9%", vol: "1.00", pack: 1, basePriceNoTax: 204.64, tax: 23.40, price: 228.04, priceVat: 275.93 },
+        { name: "Martini Rosso 15%", vol: "1.00", pack: 1, basePriceNoTax: 204.64, tax: 23.40, price: 228.04, priceVat: 275.93 },
+        { name: "Martini Extra Dry 15%", vol: "1.00", pack: 1, basePriceNoTax: 228.04, tax: 23.40, price: 204.64, priceVat: 275.93 },
+        { name: "Martini Rosato 15%", vol: "1.00", pack: 1, basePriceNoTax: 204.64, tax: 23.40, price: 228.04, priceVat: 275.93 },
+        { name: "Martini Bianco 15%", vol: "0.75", pack: 1, basePriceNoTax: 175.77, tax: 17.55, price: 193.32, priceVat: 233.92 },
+        { name: "Martini Fiero 14,9%", vol: "0.75", pack: 1, basePriceNoTax: 193.32, tax: 17.55, price: 175.77, priceVat: 233.92 },
+        { name: "Martini Rosso 15%", vol: "0.75", pack: 1, basePriceNoTax: 193.32, tax: 17.55, price: 175.77, priceVat: 233.92 },
+        { name: "Martini Extra Dry 15%", vol: "0.75", pack: 1, basePriceNoTax: 193.32, tax: 17.55, price: 175.77, priceVat: 233.92 },
+        { name: "Martini Vibrante Non-Alcoholic 0%", vol: "0.75", pack: 1, basePriceNoTax: 193.32, tax: 0.00, price: 193.32, priceVat: 233.92 },
+        { name: "Martini Florale Non-Alcoholic 0%", vol: "0.75", pack: 1, basePriceNoTax: 193.32, tax: 0.00, price: 193.32, priceVat: 233.92 },
+        { name: "Martini Riserva Speciale Ambra 18%", vol: "0.75", pack: 1, basePriceNoTax: 435.62, tax: 17.55, price: 453.17, priceVat: 548.34 },
+        { name: "Martini Riserva Speciale Rubin 18%", vol: "0.75", pack: 1, basePriceNoTax: 435.62, tax: 17.55, price: 453.17, priceVat: 548.34 },
+        { name: "Martini Riserva Bitter Premium 28,5%", vol: "0.70", pack: 1, basePriceNoTax: 483.79, tax: 81.89, price: 401.90, priceVat: 585.39 },
+        { name: "St Germain 20%", vol: "0.70", pack: 1, basePriceNoTax: 980.40, tax: 57.47, price: 1037.87, priceVat: 1255.82 }
     ],
     "Three Cents": [
-        { name: "Three Cents Pink Grapefruit soda X24", vol: "0.20", pack: 24, basePriceNoTax: 561.12, tax: 0.00, price: 561.12, priceVat: 678.96 },
-        { name: "Three Cents Pineapple soda X24", vol: "0.20", pack: 24, basePriceNoTax: 561.12, tax: 0.00, price: 561.12, priceVat: 678.96 },
-        { name: "Three Cents Mandarin & Bergamot soda X24", vol: "0.20", pack: 24, basePriceNoTax: 561.12, tax: 0.00, price: 561.12, priceVat: 678.96 },
-        { name: "Three Cents Cherry Soda X24", vol: "0.20", pack: 24, basePriceNoTax: 561.12, tax: 0.00, price: 561.12, priceVat: 678.96 },
-        { name: "Three Cents Ginger Beer X24", vol: "0.20", pack: 24, basePriceNoTax: 561.12, tax: 0.00, price: 561.12, priceVat: 678.96 },
-        { name: "Three Cents Dry Tonic X24", vol: "0.20", pack: 24, basePriceNoTax: 561.12, tax: 0.00, price: 561.12, priceVat: 678.96 },
-        { name: "Three Cents Aegean Tonic X24", vol: "0.20", pack: 24, basePriceNoTax: 561.12, tax: 0.00, price: 561.12, priceVat: 678.96 }
+        { name: "Three Cents Pink Grapefruit soda X24", vol: "0.20", pack: 24, basePriceNoTax: 690.00, tax: 0.00, price: 690.00, priceVat: 834.90 },
+        { name: "Three Cents Pineapple soda X24", vol: "0.20", pack: 24, basePriceNoTax: 690.00, tax: 0.00, price: 690.00, priceVat: 834.90 },
+        { name: "Three Cents Mandarin & Bergamot soda X24", vol: "0.20", pack: 24, basePriceNoTax: 690.00, tax: 0.00, price: 690.00, priceVat: 834.90 },
+        { name: "Three Cents Cherry Soda X24", vol: "0.20", pack: 24, basePriceNoTax: 690.00, tax: 0.00, price: 690.00, priceVat: 834.90 },
+        { name: "Three Cents Ginger Beer X24", vol: "0.20", pack: 24, basePriceNoTax: 690.00, tax: 0.00, price: 690.00, priceVat: 834.90 },
+        { name: "Three Cents Dry Tonic X24", vol: "0.20", pack: 24, basePriceNoTax: 690.00, tax: 0.00, price: 690.00, priceVat: 834.90 },
+        { name: "Three Cents Aegean Tonic X24", vol: "0.20", pack: 24, basePriceNoTax: 690.00, tax: 0.00, price: 690.00, priceVat: 834.90 },
+        { name: "Three Cents Fig Leaf Soda X24", vol: "0.20", pack: 24, basePriceNoTax: 690.00, tax: 0.00, price: 690.00, priceVat: 834.90 },
+        { name: "Three Cents Tonic Water X24", vol: "0.20", pack: 24, basePriceNoTax: 690.00, tax: 0.00, price: 690.00, priceVat: 834.90 }
     ]
 };
 
